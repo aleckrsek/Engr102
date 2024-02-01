@@ -2,3 +2,4 @@ mysql
 bs4
 requests
 pandas
+mysql-connector-python
