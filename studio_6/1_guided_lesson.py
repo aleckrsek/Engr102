@@ -53,7 +53,7 @@ class Student:
         return(int(str(self.id)[-4:]))
     
     def print_degree_title(self):
-        return("Bachelor of " + self.major)
+        print("Bachelor of " + self.major)
 
 
 
@@ -101,7 +101,7 @@ class GradStudent(Student):
         self.specialization = specialization
 
     def print_degree_title(self):
-        return("Master of " + self.major)
+        print("Master of " + self.major)
 
 # create a new student_4 which uses GradStudent instead.
 # this person's major is Computer Science and their Specialization is Artifical Intelligence
@@ -113,7 +113,7 @@ student_4 = GradStudent(1344934, "Bob", "Smith", "Computer Science", "2024", "Ar
 # for example, maybe we want a method called print_degree_title, which will print "Bachelor of {major}".
 # TODO: add the print_degree_title method to the Student class
 
-print(student_3.print_degree_title())
+student_3.print_degree_title()
     
 # What happens if we run student_4.print_degree_title?
 # Yes, it will print "Bachelor of Computer Science".
@@ -124,7 +124,7 @@ print(student_3.print_degree_title())
     
 # TODO: Add the print_degree_title to the Graduate class, have it print "Master of {major} with a specialization in {specialization}."
     
-print(student_4.print_degree_title())
+student_4.print_degree_title()
 # Test your code and make sure print_degree_title prints the master's student as intended.
     
 # This is the end of the OOP lesson. Look at part_2.py for the follow up to this lesson. 
