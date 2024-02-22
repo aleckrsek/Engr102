@@ -15,8 +15,16 @@ def main():
     participants = create_participants(rows)
     print("Answer #1: ", len(participants))
 
-    group_by_attribute(participants, "industry")
+    industry_groups = group_by_attribute(participants, "industry")
+    print(return_average_salary(industry_groups))
 
+def return_average_salary(groups_list):
+    average_salaries = []
+    for key, group in groups_list.items():
+        avg = int(sum([x.salary for x in group]) / len(group))
+        average_salaries.append([key, avg])
+
+    return average_salaries
 def group_by_attribute(object_list, property):
     groups = {}
     values = get_value_by_property(object_list, property)
@@ -27,6 +35,8 @@ def group_by_attribute(object_list, property):
         filtered_list = filter_by_value(object_list, property, value)  
         if len(filtered_list) >= 10:
             groups[value] = filtered_list
+    
+    
     return groups
 
 def filter_by_value(object_list, property, value):
@@ -43,7 +53,7 @@ def create_participants(rows):
     for row in rows[1:]:
         age = row[1]
         industry = row[2]
-        salary = row[5]
+        salary = int(row[5].replace(",",""))
         currency = row[7]
         country = row[10]
         experience = row[13]
