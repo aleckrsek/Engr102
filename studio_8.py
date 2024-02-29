@@ -64,6 +64,9 @@ def main():
     for group in average_salaries_by_education:
         print(group.key + ": " + str(group.average))
 
+    print("Answer #5:")
+
+
     # TODO: Use existing logic to solve questions 3,4,5
 
     return
