@@ -51,6 +51,18 @@ def main():
             count -= 1
         else:
             break
+    
+    print("Answer #3:")
+    age_groups = group_by_attribute(participants, "age")
+    average_salaries_by_age = get_average_salary(age_groups)
+    for group in average_salaries_by_age:
+        print(group.key + ": " + str(group.average))
+
+    print("Answer #4")
+    education_groups = group_by_attribute(participants, "education")
+    average_salaries_by_education = get_average_salary(education_groups)
+    for group in average_salaries_by_education:
+        print(group.key + ": " + str(group.average))
 
     # TODO: Use existing logic to solve questions 3,4,5
 
@@ -93,6 +105,8 @@ def group_by_attribute(objects, property):
     # create a dictionary using the property
     for obj in objects:
         value = getattr(obj, property)
+        if value == '':
+            continue
         if value in groups:
             groups[value].append(obj)
         else:
