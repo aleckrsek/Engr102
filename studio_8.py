@@ -55,17 +55,20 @@ def main():
     print("Answer #3:")
     age_groups = group_by_attribute(participants, "age")
     average_salaries_by_age = get_average_salary(age_groups)
-    for group in average_salaries_by_age:
+    for group in sorted(average_salaries_by_age, key=lambda x: x.average, reverse=True):
         print(group.key + ": " + str(group.average))
 
     print("Answer #4")
     education_groups = group_by_attribute(participants, "education")
     average_salaries_by_education = get_average_salary(education_groups)
-    for group in average_salaries_by_education:
+    for group in sorted(average_salaries_by_education, key=lambda x: x.average, reverse=True):
         print(group.key + ": " + str(group.average))
 
     print("Answer #5:")
-
+    experience_groups = group_by_attribute(participants, "experience")
+    average_salaries_by_experience = get_average_salary(experience_groups)
+    for group in sorted(average_salaries_by_experience, key=lambda x: x.average, reverse=True):
+        print(group.key + ": " + str(group.average))
 
     # TODO: Use existing logic to solve questions 3,4,5
 
