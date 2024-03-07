@@ -17,23 +17,21 @@ def main():
     soup = bs(r.content, "html.parser")
     quotes = scrape_quotes(soup)
     while(True):
-        time.sleep(0.5)
+        #time.sleep(0.5)
         if get_next_url(soup) is None:
             break
         next_page = url + get_next_url(soup)
         r = requests.get(next_page)
         soup = bs(r.content, "html.parser")
         quotes.extend(scrape_quotes(soup))
-        
-    '''
-    for quote in quotes:
-        print(quote)
-        print("----------------------------------")
-    '''
-    
-    shortest_quote(quotes)
-    longest_quote(quotes)
+    print("Question 1:")
     top_tags(quotes)
+    print("Question 2:")
+    shortest_quote(quotes)
+    print("Question 3:")
+    longest_quote(quotes)
+    print("Question 4:")
+    authors_works(quotes)
     return
 
 def scrape_quotes(soup: bs):
@@ -64,14 +62,14 @@ def shortest_quote(quotes):
     for quote in quotes:
         if len(quote.text) < len(shortestQuote.text):
             shortestQuote = quote
-    print(f"Shortest quote: {shortestQuote}")
+    print(f"Shortest quote: {shortestQuote.text} By {shortestQuote.author}")
 
 def longest_quote(quotes):
     longestQuote = quotes[0]
     for quote in quotes:
         if len(quote.text) > len(longestQuote.text):
             longestQuote = quote
-    print(f"Longest quote: {longestQuote}")
+    print(f"Longest quote: {longestQuote.text} By {longestQuote.author}")
 
 def top_tags(quotes):
     tagDict = {}
@@ -86,5 +84,22 @@ def top_tags(quotes):
     for i in range(10):
         print(tagDict[i])
 
+def authors_works(quotes):
+    authorDict: dict = {}
+    multipleWorks: dict = {}
+    for quote in quotes:
+        author = quote.author
+        if author not in authorDict:
+            authorDict.update({author: 1})
+        else:
+            currentCount = authorDict[author]
+            authorDict.update({author: currentCount+1})
+    for i, j in authorDict.items():
+        if j > 1:
+           multipleWorks.update({i: j})
+    multipleWorks = sorted(multipleWorks.items(), key=lambda x: x[1], reverse=True) 
+    for i, j in multipleWorks:
+        print(i + ", " + str(j))
+        
 if __name__ == "__main__":
     main()
