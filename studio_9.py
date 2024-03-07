@@ -33,7 +33,7 @@ def main():
     
     shortest_quote(quotes)
     longest_quote(quotes)
-
+    top_tags(quotes)
     return
 
 def scrape_quotes(soup: bs):
@@ -73,6 +73,18 @@ def longest_quote(quotes):
             longestQuote = quote
     print(f"Longest quote: {longestQuote}")
 
+def top_tags(quotes):
+    tagDict = {}
+    for quote in quotes:
+        for tag in quote.tags:
+            if tag not in tagDict:
+                tagDict.update({tag: 1})
+            else:
+                currentCount = tagDict[tag]
+                tagDict.update({tag: currentCount+1})
+    tagDict = sorted(tagDict.items(), key=lambda x: x[1], reverse=True)
+    for i in range(10):
+        print(tagDict[i])
 
 if __name__ == "__main__":
     main()
